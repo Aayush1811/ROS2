@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+
+<robot name="my_robot">
+
+    <!--Green color -->
+    <material name="green">
+        <!-- r = red, g=green, b=blue , a=alpha(transperency)-->
+        <!-- all values between 0 and 1-->
+        <color rgba="0 1 0 1"/>
+    </material>
+
+    <!--Blue color -->
+    <material name = "blue">
+        <color rgba="0 0 1 0.5"/>
+    </material>
+
+    <!--Red color -->
+    <material name = "red">
+        <color rgba="1 0 0 1"/>
+    </material>
+
+    <!--grey color -->
+    <material name = "grey">
+        <color rgba="0.5 0.5 0.5 1"/>
+    </material>
+
+
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <!-- size = "Length Width Heioght"-->
+                <!-- This all parameters (L,W,H) in Meters by default-->
+                <box size="0.6 0.4 0.2"/>
+            </geometry>
+
+            <!-- xyz = origin position-->
+            <!-- rpy = roll, Pitch, yaw (rotational position)-->
+            <!-- r = rotation in x axis-->
+            <!-- p = rotation in y axis-->
+            <!-- y = rotation in z axis-->
+            <origin xyz="0 0 0.1" rpy="0 0 0"/> 
+
+            <!-- apply a color to the link-->
+            <material name="blue"/>        
+        </visual>
+    </link>
+
+    <!-- ================================================================================================= -->
+
+    <link name="second_link">
+        <visual>
+            <geometry>
+                <!-- cylinder has 2 parameters r,l -->
+                <!-- both parameters is in meter unit-->
+                <cylinder radius="0.1" length="0.2"/>
+            </geometry>
+            <origin xyz="0 0 0.1" rpy="0 0 0"/>
+            <material name="grey"/>
+        </visual>
+    </link>
+
+    <link name="third_link">
+        <visual>
+            <geometry>
+                <box size="0.1 0.1 0.1"/>
+            </geometry>
+            <origin xyz="0.0 0.0 0.05" rpy="0.0 0.0 0.0"/>
+            <material name="green"/>
+            
+        </visual>
+    </link>
+ 
+    <joint name="base_second_joint" type="revolute">
+        <parent link="base_link"></parent>
+        <child link="second_link"></child>
+        <origin xyz="0 0 0.2" rpy="0 0 0"></origin>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.57" upper="1.57" effort="100" velocity="100"/>  
+    </joint>
+
+    <joint name="second_third_joint" type="fixed">
+    <parent link="second_link"/>
+    <child link="third_link"/>
+    <origin xyz="0.0 0.0 0.2" rpy="0.0 0.0 0.0"/>
+    
+    
+        
+    </joint>
+
+</robot>
